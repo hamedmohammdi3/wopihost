@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.fanap.fanrp.pat.officeOnline</groupId>
+	<artifactId>wopihost</artifactId>
+	<version>0.0.3.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>wopi-host</name>
+	<description>office online preview and editor</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.0.RELEASE</version>
+	</parent>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+<!--		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>-->
+	</dependencies>
+
+	<scm>
+		<connection>scm:git:http://172.16.110.215/fanrp/erp/products/pat/wopi-host.git</connection>
+		<developerConnection>scm:git:http://172.16.110.215/fanrp/erp/products/pat/wopi-host.git</developerConnection>
+		<url>http://172.16.110.215/fanrp/erp/products/pat/wopi-host.git</url>
+		<tag>wopi-host-0.0.1.0-SNAPSHOT_TAG</tag>
+	</scm>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<excludes>
+						<!--<exclude>**/*.xml</exclude>-->
+						<exclude>**/bpmn/tp/*.*</exclude>
+					</excludes>
+					<classifier>service</classifier>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!--  Source  -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+							<!--<goal>jar</goal>-->
+							<!--<goal>test-jar</goal>-->
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!--  Release  -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<tagNameFormat>${project.artifactId}-${project.version}_TAG</tagNameFormat>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<checkModificationExcludes>
+						<checkModificationExclude>**/*.iml</checkModificationExclude>
+						<checkModificationExclude>**/.idea</checkModificationExclude>
+						<checkModificationExclude>**/Log</checkModificationExclude>
+						<checkModificationExclude>**/.dev-modules-cache</checkModificationExclude>
+						<checkModificationExclude>**/SessionData</checkModificationExclude>
+						<checkModificationExclude>**/*.yml</checkModificationExclude>
+						<checkModificationExclude>**/*.ttl</checkModificationExclude>
+						<checkModificationExclude>**/log4j.properties</checkModificationExclude>
+					</checkModificationExcludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+				<configuration>
+					<skipTests>true</skipTests>
+
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<!--<goal>jar</goal>-->
+							<goal>javadoc</goal>
+						</goals>
+						<configuration> <!-- add this to disable checking -->
+							<additionalparam>-Xdoclint:none</additionalparam>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+
+		<!--<resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>**/tp/**</exclude>
+                    <exclude>**/config/**</exclude>
+                </excludes>
+            </resource>
+        </resources>-->
+
+	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>deployment</id>
+			<name>deployment</name>
+			<url>http://172.16.111.46:8081/repository/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Internal Snapshots</name>
+			<url>http://172.16.111.46:8081/repository/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+</project>
+
